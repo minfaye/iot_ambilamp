@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "ejs": "^2.6.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "semantic": "0.0.1",
+    "semantic-ui": "^2.4.0"
   }
 }
