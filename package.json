@@ -23,6 +23,7 @@
     "dotenv": "^6.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "gulp-help": "github:chmontgomery/gulp-help",
     "mongoose": "^5.3.4"
   }
 }
