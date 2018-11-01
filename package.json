@@ -4,10 +4,16 @@
   "description": "learning how to make web apps with Node.js",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Min Faye",
   "license": "ISC",
+
+  "engines": {
+    "node": "10.11.0",
+    "npm":"6.4.1"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "dotenv": "^6.1.0",
