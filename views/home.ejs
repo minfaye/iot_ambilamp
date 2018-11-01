@@ -1,7 +1,122 @@
 <% include ./partials/head %>
-
+<script type="text/javascript" src='/js/jscolor.js'></script>
 <% include ./partials/header %>
 
-<h1 class='ui header'>I am home</h1>
 
+<a id='stats-generator' onclick='analyse([<%=stats.temperatureData %>], [<%=stats.humidityData %>], [<%= stats.onData %>])' hidden></a>
+
+<!-- COLOR FORM -->
+<form class ='ui form' action='/set-color' method='post'  id='color-form'>
+	<input type='text' class=' jscolor two wide field' name='color' value='<%= settings.lightColor %>'>
+	<input type='checkbox' name='options[setAsDefault]' id='set-as-default' hidden> 
+	<input type='checkbox' name='options[changetoDefault]' id='change-to-default' hidden> 
+	<input type='checkbox' name='options[turnOff]' id='turn-off' hidden> 
+
+
+	<div class='ui sumbit button' id='change-color' onclick='submit()'>Change Color</div>
+	<div class='ui sumbit button' id='set-default-button' onclick='submit(true)'>Set As Default</div>
+	<div class='ui sumbit button' onclick='submit(false, true)'>Change To Default</div>
+	<div class='ui sumbit button' id='off-button' onclick='submit(false, false, true)'>Turn Off</div>
+
+</form>
+
+<!-- DASHBOARD -->
+<div class='ui raised padded segment'>
+	<h2 class='ui header centered'>Analytics Dashboard</h2>
+
+	<div class='ui three small grey statistics'>
+		<div class='statistic'>
+			<div class='value'>
+				<%= stats.avgTemperature %> &degC
+			</div>
+			<div class='label'>
+				Avg Temperature
+			</div>
+		</div>
+		<div class='statistic'>
+			<div class='value'>
+				<%= stats.avgHumidity %> %
+			</div>
+			<div class='label'>
+				Avg Humidity
+			</div>
+		</div>
+		<div class='statistic'>
+			<div class='value'>
+				<%= stats.avgBrightness %> / 1023
+			</div>
+			<div class='label'>
+				Avg Brightness
+			</div>
+		</div>
+	</div> <!-- END STATS -->
+
+	<div class='ui grid'>
+		<div class='three column row'>
+			<div class='column'>
+				<canvas id='temperature-chart'></canvas>
+				<h4 class='ui centered header'> Temperature Zones</h4>
+			</div>
+
+			<div class='column'>
+				<canvas id='humidity-chart'></canvas>
+				<h4 class='ui centered header'> Humidity Zones</h4>
+			</div>
+
+			<div class='column'>
+				<canvas id='on-chart'></canvas>
+				<h4 class='ui centered header'> Time On</h4>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+
+
+
+<!-- CONFIG FORM -->
+<h3 class='ui centered header'>Configuration</h3>
+
+<form class='ui form' action='/configure' method='post'>
+	<div class='fields'>
+		<div class='four wide field'>
+			<label>Hot(&degC)</label>
+			<input type ='number' name='setting[hotThreshold]' value='<%= settings.hotThreshold %>'>
+		</div>
+
+		<div class='four wide field'>
+			<label>Cold(&degC)</label>
+			<input type ='number' name='setting[coldThreshold]' value='<%= settings.coldThreshold %>'>
+		</div>
+
+		<div class='four wide field'>
+			<label>Humid(%)</label>
+			<input type ='number' name='setting[humidThreshold]' value='<%= settings.humidThreshold %>'>
+		</div>
+
+		<div class='four wide field'>
+			<label>Dry(%)</label>
+			<input type ='number' name='setting[dryThreshold]' value='<%= settings.dryThreshold %>'>
+		</div>
+
+		<div class='four wide field'>
+			<label>Dark</label>
+			<input type ='number' name='setting[darkThreshold]' value='<%= settings.darkThreshold %>'>
+		</div>
+
+		<div class='two wide field'>
+			<br>
+			<input type='submit' class='ui submit button' name='configure' value='Submit'>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript" src='/js/home.js'></script>
 <% include ./partials/foot %>

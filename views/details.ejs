@@ -3,7 +3,82 @@
 <% include ./partials/header %>
 
 
-<h1>I am details</h1>
+<a id='convert-times' onclick='convertTimes([<%= times %>])' hidden ></a>
+
+<div class='my ui three small grey statistics'>
+		<div class='statistic'>
+			<div class='value'>
+				<%= Math.min(...temperature) %> - <%= Math.max(...temperature) %> &deg C
+			</div>
+			<div class='label'>
+				Avg Temperature
+			</div>
+		</div>
+
+		<div class='statistic'>
+			<div class='value'>
+				<%= Math.min(...humidity) %> - <%= Math.max(...humidity) %> %
+			</div>
+			<div class='label'>
+				Avg Humidity
+			</div>
+		</div>
+
+		<div class='statistic'>
+			<div class='value'>
+				<%= Math.min(...brightness) %> - <%= Math.max(...brightness) %> /1023
+			</div>
+			<div class='label'>
+				Avg Brightness
+			</div>
+		</div>
+	</div>  
+
+	<div class ='my ui segment'>
+		<div class ='ui tabular menu'>				
+			<a id='first-chart' class ='active item' onclick='showLineChart(this, [<%= temperature %>])'>
+					Temperature
+			</a>
+
+			<a class ='item' onclick='showLineChart(this, [<%= humidity %>])'>
+					Humidity
+			</a>
+
+			<a class ='item' onclick='showLineChart(this, [<%= brightness %>])'>
+					Brightness
+			</a>
+		</div>
+
+		<!-- THIS IS THE CHART CANVAS -->
+		<canvas></canvas>
+	</div>
+
+	<div class='my ui grid'>
+		<div class ='my seven wide column'>
+			<h3 class='bg-blue table label'>History</h3>
+			<div class='table wrapper'>
+				<table class='ui table'>
+					<thead>
+						<th>Timestamp</th>
+						<th>Temperature</th>
+						<th>Humidity</th>
+						<th>Brightness</th>
+					</thead>
+
+					<% data.forEach( function(reading, i) { %>
+						<tr>
+							<td class ='date'></td>
+							<td><%= reading.temperature %></td>
+							<td><%= reading.humidity %></td>
+							<td><%= reading.brightness %></td>
+						</tr>
+					<% }) %>
+				</table>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript" src='/js/details.js'></script>
 
 <% include ./partials/foot %>
 
